@@ -63,7 +63,9 @@ async function getCourses(){
     // Regular Expressions
     .find({author: /^Mosh/}) // starts with Mosh
     .find({author: /Hamedani$/i}) // ends with Hamedani, i insensitive
-.find({author: /.*Mosh.*/i}) // contains Mosh (.* contains 0 or more characters before and after Mosh)
+    .find({author: /.*Mosh.*/i}) // contains Mosh (.* contains 0 or more characters before and after Mosh)
+    // counting
+    .count()
     .limit(10)
     .sort({name: -1}) // 1 = ASC, -1 = DESC
     .select({name: 1, tags: 1}); 
