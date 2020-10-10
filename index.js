@@ -60,6 +60,10 @@ async function getCourses(){
     .find({price: {$in: [10, 15, 20]}}) // price = [10, 15, 20]
     //logical
     .or([{author: "Mosh"}, {isPublished: true}]) // or operator
+    // Regular Expressions
+    .find({author: /^Mosh/}) // starts with Mosh
+    .find({author: /Hamedani$/i}) // ends with Hamedani, i insensitive
+.find({author: /.*Mosh.*/i}) // contains Mosh (.* contains 0 or more characters before and after Mosh)
     .limit(10)
     .sort({name: -1}) // 1 = ASC, -1 = DESC
     .select({name: 1, tags: 1}); 
