@@ -119,7 +119,8 @@ async function updateCourse(id) {
   }, {new: true});
 
   // console.log(course);
-  console.log(course2);
+  // console.log(course2);
 }
 
-updateCourse('5f8115b4d6d2c3365028f1e3');
+updateCourse('5f83cb8ece31bc05cc100321');
+
