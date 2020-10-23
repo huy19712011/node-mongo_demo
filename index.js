@@ -27,10 +27,34 @@ const courseSchema = new mongoose.Schema({
     type: [String],
     // Custom validator
     validate: {
+      // if Async
+      
+      // way 1: deprecated
+      // isAsync: true,
+      // validator: function(v, callback) {
+      //   setTimeout(() => {
+      //     // Do some async works
+      //     const result = v && v.length;
+
+      //     callback(result);
+      //   }, 4000);
+        
+      //   // return v && v.length > 0;
+      //   // return this.tags && this.tags.length > 0;
+      // },
+
+      // way 2: using Promise
       validator: function(v) {
-        // return v && v.length > 0;
-        return this.tags && this.tags.length > 0;
-      },
+        return new Promise(function (resolve, reject) {
+          setTimeout(() => {
+            // Do some async works
+            const result = v && v.length;
+            resolve(result);
+  
+          }, 4000);  
+        });
+      }, 
+
       message: 'A course should have at least one tag.'
     },
   },
