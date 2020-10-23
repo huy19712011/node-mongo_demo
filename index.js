@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/playground')
+mongoose.connect('mongodb://localhost/playground', 
+{ useNewUrlParser: true, 
+  useUnifiedTopology: true 
+})
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...', err));
 
 
 const courseSchema = new mongoose.Schema({
-  name: String,
+  name: {type: String, required: true},
   author: String,
   tags: [String],
   date: {
@@ -26,14 +29,21 @@ async function createCourse() {
   //   isPublished: true,
   // });
   const course = new Course({
-    name: "Angular course",
+    // name: "Angular course",
     author: "Mosh",
     tags: ["angular", "frontend"],
     isPublished: true,
   });
   
-  const result = await course.save();
-  console.log(result);
+  try {
+    const result = await course.save();
+    console.log(result);
+
+    // await course.validate();
+  }
+  catch(ex) {
+    console.log(ex.message);
+  }
 }
 
 async function getCourses(){
@@ -79,7 +89,7 @@ async function getCourses(){
   console.log(courses);
 }
 
-// createCourse();
+createCourse();
 // getCourses();
 
 async function updateCourse(id) {
@@ -122,5 +132,5 @@ async function updateCourse(id) {
   // console.log(course2);
 }
 
-updateCourse('5f83cb8ece31bc05cc100321');
+// updateCourse('5f83cb8ece31bc05cc100321');
 
