@@ -89,7 +89,7 @@ async function getCourses(){
   console.log(courses);
 }
 
-createCourse();
+// createCourse();
 // getCourses();
 
 async function updateCourse(id) {
@@ -133,4 +133,15 @@ async function updateCourse(id) {
 }
 
 // updateCourse('5f83cb8ece31bc05cc100321');
+
+async function removeCourse(id) {
+  // const result = await Course.deleteOne({_id: id});
+
+  const result = await Course.findByIdAndRemove(id);
+  // const result = await Course.findByIdAndDelete(id);
+  
+  console.log(result);
+}
+
+removeCourse('5f82cf31275c1c1dfc3b2d80');
 
